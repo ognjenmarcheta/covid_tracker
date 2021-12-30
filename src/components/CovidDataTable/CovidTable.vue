@@ -2,38 +2,37 @@
   <div class="table-wrap">
     <table class="covid-table">
       <thead>
-      <tr>
-        <th>Country name</th>
-        <th>Confirmed cases</th>
-        <th>Total number of deaths</th>
-        <th>Total number of recoveries</th>
-      </tr>
+        <tr>
+          <th>Country name</th>
+          <th>Confirmed cases</th>
+          <th>Total number of deaths</th>
+          <th>Total number of recoveries</th>
+        </tr>
       </thead>
       <tbody class="table-body">
-      <CountryElement
-        v-for="country in filteredData.Countries"
-        :key="country.CountryCode"
-        :countryData="country"
-      />
-
+        <CountryElement
+          v-for="country in filteredData.Countries"
+          :key="country.CountryCode"
+          :countryData="country"
+        />
       </tbody>
     </table>
     <table class="covid-table">
       <thead>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
       </thead>
       <tbody class="table-body">
-      <tr>
-        <td>TOTALS:</td>
-        <td>{{ filteredData.Global.TotalConfirmed }}</td>
-        <td>{{ filteredData.Global.TotalDeaths }}</td>
-        <td>{{ filteredData.Global.TotalRecovered }}</td>
-      </tr>
+        <tr>
+          <td>TOTALS:</td>
+          <td>{{ filteredData.Global.TotalConfirmed }}</td>
+          <td>{{ filteredData.Global.TotalDeaths }}</td>
+          <td>{{ filteredData.Global.TotalRecovered }}</td>
+        </tr>
       </tbody>
     </table>
     <div class="zero-state" v-if="!filteredData.Countries.length">
@@ -48,7 +47,6 @@ import CountryElement from "@/components/CovidDataTable/CountryElement.vue";
 import SummaryData from "@/types/SummaryData";
 import CountryData from "@/types/CountryData";
 import GlobalData from "@/types/GlobalData";
-import Glob = jest.Glob;
 
 export default defineComponent({
   name: "CovidTable",
@@ -56,48 +54,59 @@ export default defineComponent({
   props: {
     summaryData: {
       type: Object as PropType<SummaryData>,
-      required: true
+      required: true,
     },
     searchTerm: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   computed: {
     filteredData() {
       if (!this.summaryData) return { Countries: [] };
-      const { Countries, Global } = this.summaryData;
+      const { Countries } = this.summaryData;
       const { searchTerm } = this;
       const filteredCountries = Countries.filter((country: CountryData) => {
         return country.Country.toLowerCase().includes(searchTerm.toLowerCase());
       });
 
-
-      const globalData = filteredCountries.reduce<GlobalData>((sum, {
-        TotalRecovered,
-        NewConfirmed,
-        TotalConfirmed,
-        NewDeaths,
-        TotalDeaths,
-        NewRecovered
-      }) => {
-        return {
-          TotalRecovered: sum.TotalRecovered + TotalRecovered,
-          NewConfirmed: sum.NewConfirmed + NewConfirmed,
-          TotalConfirmed: sum.TotalConfirmed + TotalConfirmed,
-          NewDeaths: sum.NewDeaths + NewDeaths,
-          TotalDeaths: sum.TotalDeaths + TotalDeaths,
-          NewRecovered: sum.NewRecovered + NewRecovered
-
-        };
-      }, { TotalRecovered: 0, NewConfirmed: 0, TotalConfirmed: 0, NewDeaths: 0, TotalDeaths: 0, NewRecovered: 0 });
+      const globalData = filteredCountries.reduce<GlobalData>(
+        (
+          sum,
+          {
+            TotalRecovered,
+            NewConfirmed,
+            TotalConfirmed,
+            NewDeaths,
+            TotalDeaths,
+            NewRecovered,
+          }
+        ) => {
+          return {
+            TotalRecovered: sum.TotalRecovered + TotalRecovered,
+            NewConfirmed: sum.NewConfirmed + NewConfirmed,
+            TotalConfirmed: sum.TotalConfirmed + TotalConfirmed,
+            NewDeaths: sum.NewDeaths + NewDeaths,
+            TotalDeaths: sum.TotalDeaths + TotalDeaths,
+            NewRecovered: sum.NewRecovered + NewRecovered,
+          };
+        },
+        {
+          TotalRecovered: 0,
+          NewConfirmed: 0,
+          TotalConfirmed: 0,
+          NewDeaths: 0,
+          TotalDeaths: 0,
+          NewRecovered: 0,
+        }
+      );
 
       return {
         Countries: filteredCountries,
-        Global: globalData
+        Global: globalData,
       };
-    }
-  }
+    },
+  },
 });
 </script>
 
