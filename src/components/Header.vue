@@ -18,6 +18,10 @@
             <Checkmark />
             <span>Filter and search feature!</span>
           </li>
+          <li>
+            <Checkmark />
+            <span>Do not click on the logo!</span>
+          </li>
         </ul>
       </div>
 

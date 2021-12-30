@@ -1,6 +1,6 @@
 <template>
   <div class="logo-box">
-    <a href="#">
+    <a href="https://youtu.be/HIcSWuKMwOw">
       <img
         src="../assets/images/covid-19.svg"
         class="covid-19"
