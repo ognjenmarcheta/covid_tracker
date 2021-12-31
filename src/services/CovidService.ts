@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import SummaryData from "@/types/SummaryData";
 
 const apiClient = axios.create({
   baseURL: "https://api.covid19api.com",
@@ -10,7 +11,7 @@ const apiClient = axios.create({
 });
 
 export default {
-  getSummary() {
+  getSummary(): Promise<AxiosResponse<SummaryData>> {
     return apiClient.get("/summary");
   },
 };

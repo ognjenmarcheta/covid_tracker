@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 import Logo from "@/components/Logo.vue";
 
 export default defineComponent({

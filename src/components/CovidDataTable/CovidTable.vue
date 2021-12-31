@@ -29,7 +29,7 @@
       <tbody class="table-body">
         <tr>
           <td>TOTALS:</td>
-          <td>{{ filteredData.Global.TotalConfirmed }}</td>
+          <td id="total_confirmed">{{ filteredData.Global.TotalConfirmed }}</td>
           <td>{{ filteredData.Global.TotalDeaths }}</td>
           <td>{{ filteredData.Global.TotalRecovered }}</td>
         </tr>
