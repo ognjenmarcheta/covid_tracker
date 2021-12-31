@@ -1,5 +1,8 @@
 # covid_please_end
 
+##DEMO
+https://ognjenmarcheta.github.io/covid_tracker/
+
 ## Project setup
 ```
 yarn install
